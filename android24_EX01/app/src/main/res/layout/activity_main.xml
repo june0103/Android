@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_movieName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="영화제목"
+                android:inputType="text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="가격"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <SeekBar
+                android:id="@+id/seekBar_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="20000"
+                android:progress="5000" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:checkedChip="@id/chip_allUsers"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_allUsers"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="전체" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_12"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12세" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_15"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15세" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_adult"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="성인" />
+            </com.google.android.material.chip.ChipGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:numStars="5"
+                    android:rating="2.5"
+                    android:stepSize="0.5" />
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_director"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="감독이름"
+                android:inputType="text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
