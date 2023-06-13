@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             seekBarPrice.run {
                 setOnSeekBarChangeListener(object : OnSeekBarChangeListener{
                     override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
-                        tvPrice.text = "$progress 원"
+                        tvPrice.text = "${progress * 100 + 5000} 원"
                     }
 
                     override fun onStartTrackingTouch(p0: SeekBar?) {
