@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".ModifyCtgrActivity">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기존 카테고리 제목" />
+
+    <TextView
+        android:id="@+id/tv_ctgr_modi_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <EditText
+        android:id="@+id/et_ctgr_modi_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="수정할 카테고리 이름"
+        android:inputType="text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_ctgr_modify_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="확인" />
+
+        <Button
+            android:id="@+id/bt_ctgr_modify_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="취소" />
+    </LinearLayout>
+</LinearLayout>
