@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.test.android74_memoapp.databinding.FragmentMemoMainBinding
 import com.test.android74_memoapp.databinding.RowMainBinding
 
+
 class MemoMainFragment : Fragment() {
 
     lateinit var fragmentMemoMainBinding: FragmentMemoMainBinding
     lateinit var mainActivity: MainActivity
+    lateinit var memoDataList: MutableList<MemoClass>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,14 +27,26 @@ class MemoMainFragment : Fragment() {
         fragmentMemoMainBinding = FragmentMemoMainBinding.inflate(inflater)
         mainActivity = activity as MainActivity
 
-        fragmentMemoMainBinding.run {
-            toolbarMemoMain.run {
-                title = "카테고리 이름"
+        // 카테고리 인덱스 추출
+        val categoryIdx = arguments?.getInt("category_idx")
+
+        // 현재 카테로기idx에 대한 메모 데이터 가져오기
+        memoDataList = MemoDAO.selectAll(mainActivity, categoryIdx!!)
+
+        // 카테고리 정보
+        val categoryClass = CategoryDAO.selectOne(mainActivity, categoryIdx!!)
+
+        fragmentMemoMainBinding.run{
+            toolbarMemoMain.run{
+                title = categoryClass?.categoryName
                 inflateMenu(R.menu.category_main_menu)
                 setOnMenuItemClickListener {
                     when(it.itemId){
                         R.id.categoryMainItem1 -> {
-                            mainActivity.replaceFragment(MainActivity.MEMO_ADD_FRAGMENT,true,true)
+                            // 선택한 카테고리 idx를 번들에 담아 전달
+                            val newBundle = Bundle()
+                            newBundle.putInt("category_idx", categoryIdx)
+                            mainActivity.replaceFragment(MainActivity.MEMO_ADD_FRAGMENT, true, true,newBundle)
                         }
                     }
                     false
@@ -42,8 +56,8 @@ class MemoMainFragment : Fragment() {
                 setNavigationOnClickListener {
                     mainActivity.removeFragment(MainActivity.MEMO_MAIN_FRAGMENT)
                 }
-
             }
+
             recyclerViewMemoMain.run{
                 adapter = MemoMainRecyclerAdapter()
                 layoutManager = LinearLayoutManager(mainActivity)
@@ -57,15 +71,18 @@ class MemoMainFragment : Fragment() {
     inner class MemoMainRecyclerAdapter : RecyclerView.Adapter<MemoMainRecyclerAdapter.MemoMainViewHolder>(){
 
         inner class MemoMainViewHolder(rowMainBinding: RowMainBinding) : RecyclerView.ViewHolder(rowMainBinding.root){
-            var textViewRow: TextView
+            var textViewRow:TextView
 
             init {
                 textViewRow = rowMainBinding.textViewRow
 
                 rowMainBinding.root.setOnClickListener {
-                    mainActivity.replaceFragment(MainActivity.MEMO_READ_FRAGMENT,true,true)
+                    // 사용자가 선택한 메모의 idx 전달
+                    val selectedMemoIdx = memoDataList[adapterPosition].memoIdx
+                    val newBundle = Bundle()
+                    newBundle.putInt("memo_idx", selectedMemoIdx)
+                    mainActivity.replaceFragment(MainActivity.MEMO_READ_FRAGMENT, true, true, newBundle)
                 }
-
             }
         }
 
@@ -82,13 +99,23 @@ class MemoMainFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-           return 30
+            return memoDataList.size
         }
 
         override fun onBindViewHolder(holder: MemoMainViewHolder, position: Int) {
-            holder.textViewRow.text = "메모 : $position"
+            holder.textViewRow.text = memoDataList[position].memoSubject
         }
     }
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

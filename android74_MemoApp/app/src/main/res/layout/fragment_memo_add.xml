@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".MemoAddFragment" >
+    tools:context=".MemoAddFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMemoAdd"
@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp" >
 
@@ -56,8 +56,7 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
