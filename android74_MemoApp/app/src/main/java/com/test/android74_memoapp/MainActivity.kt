@@ -52,11 +52,24 @@ class MainActivity : AppCompatActivity() {
         // 비빌번호 설정 여부에 따라 처음 보여줄 프레그먼트를 다르게 지정한다.
         //replaceFragment(PASSWORD_FRAGMENT, false, false)
 
-        // 저장된 비빌번호를 가져온다.
-        val passwordList = PasswordDAO.selectAll(this)
+        // 저장된 비빌번호를 가져온다. sqlite ver
+//        val passwordList = PasswordDAO.selectAll(this)
+
+//        // 설정된 비밀번호가 없다면
+//        if(passwordList.size == 0){
+//            replaceFragment(PASSWORD_FRAGMENT, false, false)
+//        }
+//        // 설정된 비밀번호가 있다면
+//        else {
+//            replaceFragment(LOGIN_FRAGMENT, false, false)
+//        }
+
+        // 저장된 비빌번호를 가져온다. preference ver
+        val pref = getSharedPreferences("data", MODE_PRIVATE)
+        val password = pref.getString("pw",null)
 
         // 설정된 비밀번호가 없다면
-        if(passwordList.size == 0){
+        if(password == null){
             replaceFragment(PASSWORD_FRAGMENT, false, false)
         }
         // 설정된 비밀번호가 있다면

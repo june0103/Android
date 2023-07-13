@@ -1,5 +1,6 @@
 package com.test.android74_memoapp
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.test.android74_memoapp.databinding.FragmentLoginBinding
 
 
@@ -49,8 +51,12 @@ class LoginFragment : Fragment() {
         fragmentLoginBinding.run{
             val str1 = loginPw.text.toString()
 
-            // 데이터 베이스에서 비밀번호를 가져온다
-            val passwordClass = PasswordDAO.selectOne(mainActivity,1)
+            // 데이터 베이스에서 비밀번호를 가져온다 sqlite ver
+//            val passwordClass = PasswordDAO.selectOne(mainActivity,1)
+
+            // 데이터 베이스에서 비밀번호를 가져온다 preference ver
+            val pref = mainActivity.getSharedPreferences("data", Context.MODE_PRIVATE)
+            val password = pref.getString("pw",null)
 
             if(str1.length == 0){
                 val builder = AlertDialog.Builder(mainActivity)
@@ -63,8 +69,21 @@ class LoginFragment : Fragment() {
                 return
             }
 
-            // 입력한 비밀번호와 저장된 비밀번호가 다르다면...
-            if(str1 != passwordClass?.passwordData){
+            // 입력한 비밀번호와 저장된 비밀번호가 다르다면... sqlite ver
+//            if(str1 != passwordClass?.passwordData){
+//                val builder = AlertDialog.Builder(mainActivity)
+//                builder.setTitle("비밀번호 오류")
+//                builder.setMessage("비밀번호를 잘못 입력하였습니다")
+//                builder.setPositiveButton("확인"){ dialogInterface: DialogInterface, i: Int ->
+//                    loginPw.setText("")
+//                    mainActivity.showSoftInput(loginPw, 200)
+//                }
+//                builder.show()
+//                return
+//            }
+
+            // 입력한 비밀번호와 저장된 비밀번호가 다르다면...   preference ver
+            if(str1 != password){
                 val builder = AlertDialog.Builder(mainActivity)
                 builder.setTitle("비밀번호 오류")
                 builder.setMessage("비밀번호를 잘못 입력하였습니다")
